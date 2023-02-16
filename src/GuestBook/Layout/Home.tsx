@@ -12,7 +12,7 @@ const Home= () => {
     <Wrapper>
       <Header />
       <FieldWrapper>
-        <Title>Selamat Datang di Polsek Gondomanan 123<br/>Silahkan Isi Buku Tamu Terlebih Dahulu</Title>
+        <Title>Selamat Datang di Polsek Gondomanan<br/>Silahkan Isi Buku Tamu Terlebih Dahulu</Title>
         <InputWrapper>
             <InputText label='Nama Lengkap' id='nama' type='text'/>
             <InputText label='Nomor Telepon' id='no_hp' type='number'/>
