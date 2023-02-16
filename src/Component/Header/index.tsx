@@ -18,7 +18,7 @@ const Header = () => {
         <Wrapper>
           <ImageWrapper >
             <img src={logo} alt="logo" />
-            <p> Kepolisian Daerah<br/>Daerah istimewa Yogyakarta</p>
+            <p> Kepolisian Daerah<br/>Daerah Istimewa Yogyakarta</p>
           </ImageWrapper>
           
         </Wrapper>
