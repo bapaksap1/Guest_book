@@ -4,7 +4,7 @@ import Home from './GuestBook/Layout/Home';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import GlobalStyle from './Component/GlobalStyle';
 import Portal from './GuestBook/Layout/Portal';
-import Login from './GuestBook/Layout/Login';
+import Login from './GuestBook/Login/Login';
 
 function App() {
   return ( 
