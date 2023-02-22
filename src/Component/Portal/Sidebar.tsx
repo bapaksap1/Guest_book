@@ -2,32 +2,33 @@ import * as React from 'react';
 import { useState } from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
-import AppBar from '@mui/material/AppBar';
-import CssBaseline from '@mui/material/CssBaseline';
-import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
-import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/Inbox';
-import MailIcon from '@mui/icons-material/Mail';
-import BasicTable from '../Table';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import PeopleIcon from '@mui/icons-material/People';
 import LogoutIcon from '@mui/icons-material/Logout';
-import Dashboard from './Dashboard';
-import AddGuest from './AddGuest';
-import TableComponent from '../Table';
+
+
+
 import styled from "styled-components"
 import logo from '../../Lambang_Polda_DIY.png' 
+import Dashboard from '../../Portal/Dashboard';
+import Users from '../../Portal/Users';
 
 const drawerWidth = 240;
 
 const PortalComponent = () => {
-  const [menu, setMenu] = useState("Daftar Tamu")
+  const [menu, setMenu] = useState("Dashboard")
+  const [selectedIndex, setSelectedIndnex] = useState(0)
+
+  const data = (text: string, index: number) => {
+    setMenu(text)
+    setSelectedIndnex(index)
+  }
   return (
     <Box sx={{ display: 'flex' }}>
       <Drawer
@@ -44,7 +45,9 @@ const PortalComponent = () => {
         <Box sx={{ overflow: 'auto' }}>
           <List>
             {['Dashboard', 'Daftar Tamu'].map((text, index) => (
-              <ListItem key={text} button disablePadding onClick={() => setMenu(text)}>
+              <ListItem key={text} button disablePadding onClick={() => data(text, index)} style={
+                selectedIndex === index ? { backgroundColor: "grey" } : {}
+              }>
                 <ListItemButton>
                   <ListItemIcon>
                     {index % 2 === 0 ? <DashboardIcon /> : <PeopleIcon />}
@@ -78,7 +81,7 @@ const PortalComponent = () => {
           <Dashboard />
           :
           menu === 'Daftar Tamu' ?
-          <TableComponent />
+          <Users />
           : null
         }
      

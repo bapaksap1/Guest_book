@@ -8,6 +8,9 @@ type TInput =
   label: string;
   id: string;
   type: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  value: string;
+  error: boolean;
 }
 
 const InputText:React.FC<TInput> = (props) => {
@@ -18,7 +21,7 @@ const InputText:React.FC<TInput> = (props) => {
         maxWidth: '100%',
       }}
     >
-      <Input fullWidth label={props.label} id={props.id} type={props.type} />
+      <Input fullWidth label={props.label} id={props.id} type={props.type} onChange={props.onChange} value={props.value} error={props.error}/>
     </Box>
   );
 }

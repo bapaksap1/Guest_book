@@ -7,6 +7,9 @@ type TInputArea =
 {
   id: string;
   label: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  value: string;
+  error: boolean;
 }
 
 const InputTextArea:React.FC<TInputArea> = (props) => {
@@ -23,7 +26,7 @@ const InputTextArea:React.FC<TInputArea> = (props) => {
         label={props.label}
           multiline
           rows={5}
-          />
+          onChange={props.onChange} value={props.value} error={props.error}/> 
     </Box>
   );
 }

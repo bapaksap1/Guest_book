@@ -1,18 +1,43 @@
-import React from 'react'
-import Footer from '../../Component/Footer'
-import Header from '../../Component/Header'
-import styled from 'styled-components'
+import * as React from 'react';
+import { yupResolver } from '@hookform/resolvers/yup'
+import Box from '@mui/material/Box';
 import InputText from '../../Component/Input/InputText'
 import InputTextArea from '../../Component/Input/InputTextArea'
-import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
+import styled from 'styled-components';
+import Buttons from '../Button';
 import * as yup from "yup"
 import { Controller, useForm } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
-import { TForm } from '../../Types/users'
-import Buttons from '../../Component/Button'
+import { TForm } from '../../Types/users';
 
 
-const Home= () => {
+type TModal = {
+  open: boolean;
+  onClickClose: () => void;
+}
+
+const style = {
+  position: 'absolute' as 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
+
+const AddUsersModal: React.FC<TModal> = ({open, onClickClose}) => {
+
+
+  React.useEffect(() => {
+    if (open) {
+      reset()
+    }
+  }, [open])
+
 
   const { handleSubmit, watch, control, formState, setValue, reset } = useForm<TForm>({
     mode: "all",
@@ -21,13 +46,29 @@ const Home= () => {
     defaultValues
   });
   const { isValid } = formState;
+
+  const onSubmit = (values: TForm) => {
+    console.log("submit berhasil");
+    console.log(values);
+    onClickClose()
+    
+  }
+
+
   return (
-    <Wrapper>
-      <Header />
-      <FieldWrapper>
-        <Title>Selamat Datang di Polsek Gondomanan<br/>Silahkan Isi Buku Tamu Terlebih Dahulu</Title>
-        <InputWrapper>
-        <Controller
+    <div>
+      <Modal
+        open={open}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Tambah Tamu
+          </Typography>
+          <InputWrapper>
+          <Controller
             name="name"
             control={control}
             render={({field: {onChange, value}, fieldState: {error} }) => (
@@ -35,38 +76,39 @@ const Home= () => {
             )}
            />
            <Controller
-            name="name"
+            name="phoneNumber"
             control={control}
             render={({field: {onChange, value}, fieldState: {error} }) => (
               <InputText label='Nomor Telepon' id='phoneNumber' type='number' value={value} onChange={onChange} error={!!error}/>
             )}
            />
            <Controller
-            name="name"
+            name="address"
             control={control}
             render={({field: {onChange, value}, fieldState: {error} }) => (
               <InputTextArea id='address' label='Alamat' value={value} onChange={onChange} error={!!error}/>
             )}
            />
            <Controller
-            name="name"
+            name="description"
             control={control}
             render={({field: {onChange, value}, fieldState: {error} }) => (
               <InputTextArea id='description' label='Keperluan' value={value} onChange={onChange} error={!!error}/>
             )}
            />
-          
         </InputWrapper> 
         <ButtonWrapper>
-            <Buttons variant="contained" label='Submit'/>
+            <Buttons label='Tambah' type='submit' disabled={!isValid}/>
+            <Buttons label='Batal' onClick={onClickClose}/>
           </ButtonWrapper>
-        </FieldWrapper>
-      <Footer />
-    </Wrapper>
-  )
+        </Box>
+      </form>
+      </Modal>
+    </div>
+  );
 }
 
-export default Home
+export default AddUsersModal;
 
 const validationSchema =
   yup.object({
@@ -83,29 +125,6 @@ const validationSchema =
     description: "",
   };
 
-
-const Wrapper = styled.div`
-  width: 100%;
-  height: 100vh;
-  background-color: #e9e9e9;
-  
-  
-`
-const FieldWrapper = styled.div`
-  width: 50%;
-  margin-left: 25%;
-  height: 100%;
-  background-color: white;
-
-  `
-
-const Title = styled.p`
-  font-size: 20px;
-  text-align: center;
-  margin: 0px;
-  padding-top: 60px;
-`
-
 const InputWrapper = styled.div`
   margin-top: 30px;
   display: flex;
@@ -113,12 +132,10 @@ const InputWrapper = styled.div`
   gap: 20px;
   align-items: center;
 `
+
 const ButtonWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-  > Button {
-    width: 500px;
-  }
+margin-top: 10px;
+display: flex;
+flex-direction: row;
+gap: 10px;
 `
