@@ -14,16 +14,10 @@ const Header = () => {
 
   return (
     <Box>
-      <AppBar sx={{position: "relative"}} >
-        <Wrapper>
           <ImageWrapper >
             <img src={logo} alt="logo" />
             <p> Kepolisian Daerah<br/>Daerah Istimewa Yogyakarta</p>
           </ImageWrapper>
-          
-        </Wrapper>
-      </AppBar>
-
     </Box>
   );
 }
@@ -37,15 +31,16 @@ const Wrapper = styled(Toolbar)`
 const ImageWrapper = styled(Box)`
   display: flex;
   flex-direction: row;
-  
-  background-color: white;
-  padding: 5px 5px ;
+  justify-content: center;
+  padding: 20px 0px ;
+
   > img {
-  width: 5%;
-  height: 5%;
+  width: 3%;
+  height: 3%;
   }
   > p {
     color: black;
     font-family: "poppins";
+    font-weight: bold;
   }
 `

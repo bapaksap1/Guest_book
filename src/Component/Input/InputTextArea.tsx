@@ -20,7 +20,7 @@ const InputTextArea:React.FC<TInputArea> = (props) => {
         maxWidth: '100%',
       }}
     >
-      <TextField
+      <Input
       fullWidth
       id={props.id}
         label={props.label}
@@ -40,6 +40,10 @@ const Input = styled(TextField)`
   input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+  }
+
+  .MuiInputBase-root{
+    border-radius: 20px;
   }
  
 `

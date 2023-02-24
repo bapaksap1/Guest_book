@@ -8,7 +8,7 @@ import Button from '@mui/material/Button';
 import * as yup from "yup"
 import { Controller, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { TForm } from '../../Types/users'
+import { TForm } from '../../Types/guest'
 import Buttons from '../../Component/Button'
 
 
@@ -20,12 +20,14 @@ const Home= () => {
     resolver: yupResolver(validationSchema),
     defaultValues
   });
+  
   const { isValid } = formState;
   return (
     <Wrapper>
       <Header />
       <FieldWrapper>
-        <Title>Selamat Datang di Polsek Gondomanan<br/>Silahkan Isi Buku Tamu Terlebih Dahulu</Title>
+        <Title>Selamat Datang <br/> di Polsek Gondomanan</Title>
+        <SubTitle>Silahkan Isi Buku Tamu Terlebih Dahulu</SubTitle>
         <InputWrapper>
         <Controller
             name="name"
@@ -61,7 +63,7 @@ const Home= () => {
             <Buttons variant="contained" label='Submit'/>
           </ButtonWrapper>
         </FieldWrapper>
-      <Footer />
+
     </Wrapper>
   )
 }
@@ -87,23 +89,32 @@ const validationSchema =
 const Wrapper = styled.div`
   width: 100%;
   height: 100vh;
-  background-color: #e9e9e9;
-  
+  background-color: #d8cfcf;
   
 `
 const FieldWrapper = styled.div`
-  width: 50%;
-  margin-left: 25%;
-  height: 100%;
-  background-color: white;
+  width: 40%;
+  margin-left: 30%;
+  padding-bottom: 60px;
+  background-color: white; 
+  border-radius: 15px;
+  border: 1px solid black;
+  box-shadow: 4px 4px 4px 4px grey;
 
   `
 
 const Title = styled.p`
-  font-size: 20px;
+  font-size:30px;
   text-align: center;
   margin: 0px;
-  padding-top: 60px;
+  padding-top: 30px;
+  font-weight: bold;
+`
+const SubTitle = styled.p`
+  font-size: 18px;
+  text-align: center;
+  margin: 0px;
+
 `
 
 const InputWrapper = styled.div`

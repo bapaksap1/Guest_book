@@ -21,7 +21,7 @@ const InputText:React.FC<TInput> = (props) => {
         maxWidth: '100%',
       }}
     >
-      <Input fullWidth label={props.label} id={props.id} type={props.type} onChange={props.onChange} value={props.value} error={props.error}/>
+      <Input fullWidth label={props.label} id={props.id} type={props.type} onChange={props.onChange} value={props.value} error={props.error} />
     </Box>
   );
 }
@@ -29,12 +29,19 @@ const InputText:React.FC<TInput> = (props) => {
 
 export default InputText;
 
+
+
 const Input = styled(TextField)`
-  
+
   input::-webkit-outer-spin-button,
   input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+.MuiInputBase-root{
+    border-radius: 20px;
   }
+
+  
  
 `

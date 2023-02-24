@@ -9,12 +9,15 @@ import styled from 'styled-components';
 import Buttons from '../Button';
 import * as yup from "yup"
 import { Controller, useForm } from 'react-hook-form'
-import { TForm } from '../../Types/users';
+import { TForm, TMutationAddGuest } from '../../Types/guest';
+import { ADDGUEST } from '../../Graphql/user.graphql';
+import { useMutation } from '@apollo/client';
 
 
 type TModal = {
   open: boolean;
   onClickClose: () => void;
+  
 }
 
 const style = {
@@ -47,12 +50,23 @@ const AddUsersModal: React.FC<TModal> = ({open, onClickClose}) => {
   });
   const { isValid } = formState;
 
-  const onSubmit = (values: TForm) => {
-    console.log("submit berhasil");
-    console.log(values);
-    onClickClose()
-    
+  const [addGuest, { data, error, loading}] = useMutation<TMutationAddGuest>(ADDGUEST, {
+    errorPolicy: "all",
+    fetchPolicy: 'network-only'
+  })
+  
+
+
+  const onSubmit = async (values: TForm) => {
+    try {
+      await addGuest({
+        variables: {
+          data: values
+        }
+      });
+    } catch (error) { }
   }
+
 
 
   return (

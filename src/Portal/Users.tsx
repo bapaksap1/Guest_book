@@ -5,6 +5,9 @@ import styled from 'styled-components'
 import AddUsersModal from '../Component/Popup/AddUser'
 import { useState } from 'react'
 import BoxComponent from '../Component/BoxWrapper'
+import { useQuery } from '@apollo/client'
+import { TGuest } from '../Types/guest'
+import { GUESTS } from '../Graphql/user.graphql'
 
 const Users = () => {
   const [open, setOpen] = useState(false)
@@ -19,6 +22,8 @@ const Users = () => {
 
   const value = 1;
 
+  
+
   return (
     <PageWrapper>
     <Wrapper>
@@ -31,7 +36,7 @@ const Users = () => {
       <ButtonWrapper>
         <Buttons label='Tambah Tamu' onClick={openModal} />
       </ButtonWrapper>
-      <AddUsersModal open={open} onClickClose={closeModal}/>
+      <AddUsersModal open={open} onClickClose={closeModal} />
     </PageWrapper>
   )
 }
