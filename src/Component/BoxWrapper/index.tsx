@@ -5,7 +5,7 @@ import UsersIcon from '../../Asset/people-circle-outline.svg'
 
 type Tbox = {
   label: string ;
-  value: number;
+  value?: number;
 }
 
 const BoxComponent: React.FC<Tbox> = (props) => {

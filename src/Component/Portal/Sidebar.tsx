@@ -44,7 +44,7 @@ const PortalComponent = () => {
         <Divider />
         <Box sx={{ overflow: 'auto' }}>
           <List>
-            {['Dashboard', 'Daftar Tamu'].map((text, index) => (
+            {['Dashboard'].map((text, index) => (
               <ListItem key={text} button disablePadding onClick={() => data(text, index)} style={
                 selectedIndex === index ? { backgroundColor: "grey" } : {}
               }>

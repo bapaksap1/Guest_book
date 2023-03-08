@@ -42,8 +42,9 @@ const Input = styled(TextField)`
   margin: 0;
   }
 
-  .MuiInputBase-root{
+  .MuiInputBase-root fieldset{
     border-radius: 20px;
+    border-color: black;
   }
  
 `

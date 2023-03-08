@@ -9,12 +9,19 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import  Button  from "@mui/material/Button"
 
+import jsPDF from 'jspdf'
+import autoTable from 'jspdf-autotable'
 
 import moment from 'moment';
 import styled from 'styled-components';
 import { useMutation, useQuery } from '@apollo/client';
 import { TGuest } from '../../Types/guest';
 import { GUESTS } from '../../Graphql/user.graphql';
+import { useState } from 'react';
+import PopupDeleteGuest from '../Popup/DeleteGuest';
+import PopupUpdateGuest from '../Popup/UpdateGuest';
+import { CircularProgress } from '@mui/material';
+
 
 type TResGuest = {
   guests: TGuest[]
@@ -29,7 +36,7 @@ interface Column {
   
 }
 
-const columns: readonly Column[] = [
+const columns: readonly  Column[] = [
   { id: 'id', label: 'id', minWidth:0, hidden: true},
   { id: 'no', label: 'No', minWidth:10 },
   { id: 'nama', label: 'Nama', minWidth: 50 },
@@ -83,16 +90,36 @@ function createData(
 
 
 export default function TableComponent() {
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [popupDelete, setPopupDelete] = useState(false)
+  const [popupUpdate, setPopupUpdate] = useState(false)
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [deleteData, setDeleteData] = useState<{ id: string; name: string; }>({ id: "", name: "" })
+  const [updateData, setUpdateData] = useState<TGuest | null>(null)
+  const [load, setLoad] = useState(true)
+  const doc = new jsPDF()
 
+  
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
   };
 
   const { data, error, loading, refetch } = useQuery<TResGuest>(GUESTS)
 
+  const onClickDelete = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, dataProps: { id: string; name: string; }) => {
+    e.stopPropagation()
+    setPopupDelete(true)
+    setDeleteData(dataProps)
+  }
+
+  const onClickUpdate = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, data: TGuest) =>{
+    e.stopPropagation()
+    setUpdateData(data)
+    setPopupUpdate(true)
+  }
+
   const rows: any = data?.guests?.map((val, idx) =>  {
+
     return createData(
       val?.id,
       String(idx + 1),
@@ -102,14 +129,44 @@ export default function TableComponent() {
       val?.description,
       moment(val?.createdAt).locale("id").format("DD/MM/YYYY HH:mm:ss"),
     <Action>
-      <Button ><EditIcon /></Button>
-      <Button ><XIcon /></Button>
+      <Button onClick={(e) => onClickUpdate(e, val)}><EditIcon /></Button>
+      <Button onClick={(e) => onClickDelete(e, { id: val?.id, name: val?.name })}><XIcon /></Button>
     </Action>
     )}, [data]);
 
+    
 
 
-  
+    
+    
+
+    const col = columns?.map((column) => {
+      return (
+        column.label
+      )
+    })
+
+    const ro: any = data?.guests.map ((val, idx) => {
+      let x = Object.entries(val)
+      return{
+      id: val.id,
+      no: idx+1,
+      name: val.name
+      }
+    })
+
+
+    
+
+
+
+    const onCloseDeleteBook = () => {
+      setPopupDelete(false)
+    }
+
+    const onCloseUpdateBook = () => {
+      setPopupUpdate(false)
+    }
   
 
   const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -117,8 +174,28 @@ export default function TableComponent() {
     setPage(0);
   };
 
+ 
+
+  
+
+console.log(ro);
+
+
+// autoTable(doc, {
+//   head: [col],
+//   body: [ro]
+// })
+
+//    const createPDF = () => {
+//       doc.save('table.pdf')
+//    }
+
+
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+      <PopupDeleteGuest open={popupDelete} onClickClose={onCloseDeleteBook} data={deleteData} refetch={refetch} />
+      <PopupUpdateGuest open={popupUpdate} onClickClose={onCloseUpdateBook} data={updateData!} refetch={refetch}/>
+      {load === true && data?.guests?.length === 0 ?  <CircularProgress /> : 
       <TableContainer sx={{ maxHeight: "60vh",   }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
@@ -134,6 +211,8 @@ export default function TableComponent() {
               ))}
             </TableRow>
           </TableHead>
+ 
+         
           <TableBody>
             {rows
               ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
@@ -150,8 +229,10 @@ export default function TableComponent() {
                 );
               })}
           </TableBody>
+
         </Table>
       </TableContainer>
+}
       <TablePagination
         rowsPerPageOptions={[10, 25, 100]}
         component="div"
@@ -161,6 +242,9 @@ export default function TableComponent() {
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
+      
+      
+      
     </Paper>
   );
 }

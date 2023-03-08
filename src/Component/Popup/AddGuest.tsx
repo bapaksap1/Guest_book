@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { yupResolver } from '@hookform/resolvers/yup'
 import Box from '@mui/material/Box';
-import InputText from '../../Component/Input/InputText'
-import InputTextArea from '../../Component/Input/InputTextArea'
+import InputText from '../Input/InputText'
+import InputTextArea from '../Input/InputTextArea'
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import styled from 'styled-components';
@@ -32,7 +32,7 @@ const style = {
   p: 4,
 };
 
-const AddUsersModal: React.FC<TModal> = ({open, onClickClose}) => {
+const AddGuestModal: React.FC<TModal> = ({open, onClickClose}) => {
 
 
   React.useEffect(() => {
@@ -122,7 +122,7 @@ const AddUsersModal: React.FC<TModal> = ({open, onClickClose}) => {
   );
 }
 
-export default AddUsersModal;
+export default AddGuestModal;
 
 const validationSchema =
   yup.object({

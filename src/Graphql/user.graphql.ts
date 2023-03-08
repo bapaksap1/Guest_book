@@ -14,6 +14,18 @@ export const GUESTS = gql`
   }
 }`
 
+export const SUMMARY = gql`
+query{
+  summary {
+    numberOfVisits {
+      day
+      week
+      month
+      year
+    }
+  }
+}`
+
 export const ADDGUEST= gql`
 mutation($data: addGuestInput!){
   addGuest(data: $data){
@@ -25,19 +37,35 @@ mutation($data: addGuestInput!){
   }
 }`
 
-export const DELETEBOOKCATEGORY = gql`
-mutation($categoryId: ID!){ 
- deleteBookCategory(categoryId: $categoryId){
-   id
-   name
-   }
- }
+export const DELETEGUEST = gql`
+mutation($guestId: ID!){
+  deleteGuest(guestId: $guestId){
+    id
+    name
+  }
+}
 `
 
-export const UPDATEBOOKCATEGORY = gql`
-mutation($data: updateBookCategoryInput!){
-   updateBookCategory(data: $data){
-    updatedAt,
+export const UPDATEGUEST = gql`
+mutation($data: updateGuestInput!){
+  updateGuest(data: $data) {
+    id
+    name
+    address
+    phoneNumber
+    description
     createdAt
+    updatedAt
   }
 }`
+
+export const PORTAL_INIT_GUEST_UPDATE = gql`
+  query($guestId: ID!) {
+    guest(guestId: $guestId) {
+      name
+      phoneNumber
+      address
+      description
+    }
+  }
+`;

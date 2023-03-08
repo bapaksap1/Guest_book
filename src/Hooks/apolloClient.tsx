@@ -2,7 +2,7 @@ import React from 'react';
 import { ApolloClient, InMemoryCache, ApolloProvider, HttpLink, concat, ApolloLink } from '@apollo/client';
 
 const httpLink = new HttpLink({
-  uri: "https://cautious-tunic-seal.cyclic.app/graphql",
+  uri: "https://vast-puce-hare-shoe.cyclic.app/graphql",
   fetch: (uri, options) => {
     return fetch(uri, options).then(response => {
       if (response.status >= 500) {
