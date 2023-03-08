@@ -26,7 +26,7 @@ const Login = () => {
       user: { fullName: string; role: string; username: string };
     }
   }
-  const PUBLIC_KEY = process.env.NEXT_PUBLIC_PUBLIC_KEY as string
+  const PUBLIC_KEY = process.env.REACT_APP_PUBLIC_KEY as string
 
   const encryptRSA = (text: string) => {
     const encrypted = crypto.publicEncrypt(
@@ -38,9 +38,7 @@ const Login = () => {
     );
     return encrypted.toString("base64");
   }
-  
-  
-  
+
   useEffect(() => {
     sessionStorage.removeItem("token")
   }, [])
@@ -68,7 +66,7 @@ const Login = () => {
         }
       });
       console.log("tombol");
-      
+
     } catch (error) {
 
     }
@@ -76,33 +74,33 @@ const Login = () => {
 
   return (
     <Wrapper>
-       <Grid style={{ minHeight: '100vh', width: "100%", display: 'flex', flexDirection: "column", backgroundColor: "grey", justifyContent: "center" }}>
-      <form onSubmit={handleSubmit(onSubmit)}>
-      <FieldWrapper>
-        <Title>Login Admin</Title>
-        <SubTitle>Buku Tamu Polsek Gondomanan</SubTitle>
-        <InputWrapper>
-        <Controller
-            name="username"
-            control={control}
-            render={({field: {onChange, value}, fieldState: {error} }) => (
-              <InputText label='Username' id='username' type='text' value={value} onChange={onChange} error={!!error}/>
-            )}
-           />
-           <Controller
-            name="password"
-            control={control}
-            render={({field: {onChange, value}, fieldState: {error} }) => (
-              <InputText label='Password' id='password' type='password' value={value} onChange={onChange} error={!!error}/>
-            )}
-           />   
-        </InputWrapper> 
-        <ButtonWrapper>
-            <Buttons variant="contained" label='Login' color='inherit' disabled={!isValid} type='submit'/>
-          </ButtonWrapper>
-        </FieldWrapper>
+      <Grid style={{ minHeight: '100vh', width: "100%", display: 'flex', flexDirection: "column", backgroundColor: "grey", justifyContent: "center" }}>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <FieldWrapper>
+            <Title>Login Admin</Title>
+            <SubTitle>Buku Tamu Polsek Gondomanan</SubTitle>
+            <InputWrapper>
+              <Controller
+                name="username"
+                control={control}
+                render={({ field: { onChange, value }, fieldState: { error } }) => (
+                  <InputText label='Username' id='username' type='text' value={value} onChange={onChange} error={!!error} />
+                )}
+              />
+              <Controller
+                name="password"
+                control={control}
+                render={({ field: { onChange, value }, fieldState: { error } }) => (
+                  <InputText label='Password' id='password' type='password' value={value} onChange={onChange} error={!!error} />
+                )}
+              />
+            </InputWrapper>
+            <ButtonWrapper>
+              <Buttons variant="contained" label='Login' color='inherit' disabled={!isValid} type='submit' />
+            </ButtonWrapper>
+          </FieldWrapper>
         </form>
-        </Grid>
+      </Grid>
     </Wrapper>
   )
 }
@@ -115,10 +113,10 @@ const validationSchema =
     password: yup.string().required("Required"),
   });
 
-  const defaultValues = {
-    username: "",
-    password: "",
-  };
+const defaultValues = {
+  username: "",
+  password: "",
+};
 
 
 const Wrapper = styled.div`
