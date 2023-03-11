@@ -32,10 +32,10 @@ const Dashboard = () => {
 
   console.log(data?.summary?.numberOfVisits);
   
+  if(loading) return <LoadingWrapper> <CircularProgress /> </LoadingWrapper>
 
   return (
     <PageWrapper>
-      
     <Wrapper>
       <BoxComponent label={"Kunjungan Bulan Ini"} value={data?.summary?.numberOfVisits?.month}/>
       <BoxComponent label={"Kunjungan Minggu Ini"} value={data?.summary?.numberOfVisits?.week} />
@@ -52,6 +52,14 @@ const Dashboard = () => {
 
 export default Dashboard;
 
+const LoadingWrapper = styled.div`
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  flex-direction: row;
+  justify-content: center;
+`
+
 const PageWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -64,12 +72,11 @@ const ButtonWrapper = styled.div`
 display: flex;
 flex-direction: row;
 justify-content: end;
-width: 100%,
+width: 100%;
 `
 
 const Wrapper = styled.div`
   width: 100%;
-
   display: flex;
   flex-direction: row;
   justify-content: space-between;

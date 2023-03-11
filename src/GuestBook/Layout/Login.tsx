@@ -13,7 +13,8 @@ import Buttons from '../../Component/Button'
 import { useMutation } from '@apollo/client'
 import { Grid } from '@mui/material'
 import { LOGIN } from '../../Graphql/auth.graphql'
-import crypto from 'crypto'
+import ModalComponent from '../../Component/Modal'
+// import crypto from 'crypto'
 
 const Login = () => {
   type TLoginMutaion = {
@@ -25,16 +26,16 @@ const Login = () => {
   }
   const PUBLIC_KEY = process.env.REACT_APP_PUBLIC_KEY as string
 
-  const encryptRSA = (text: string) => {
-    const encrypted = crypto.publicEncrypt(
-      {
-        key: PUBLIC_KEY,
-        padding: crypto.constants.RSA_PKCS1_OAEP_PADDING,
-      },
-      Buffer.from(text, "utf8")
-    );
-    return encrypted.toString("base64");
-  }
+  // const encryptRSA = (text: string) => {
+  //   const encrypted = crypto.publicEncrypt(
+  //     {
+  //       key: PUBLIC_KEY,
+  //       padding: crypto.constants.RSA_PKCS1_OAEP_PADDING,
+  //     },
+  //     Buffer.from(text, "utf8")
+  //   );
+  //   return encrypted.toString("base64");
+  // }
 
   useEffect(() => {
     sessionStorage.removeItem("token")
@@ -59,7 +60,7 @@ const Login = () => {
       await login({
         variables: {
           username: values.username,
-          password: encryptRSA(values.password)
+          password: (values.password)
         }
       });
       console.log("tombol");

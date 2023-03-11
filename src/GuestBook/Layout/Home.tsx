@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Footer from '../../Component/Footer'
 import Header from '../../Component/Header'
 import styled, { keyframes } from 'styled-components'
@@ -13,10 +13,13 @@ import Buttons from '../../Component/Button'
 import { useMutation } from '@apollo/client'
 import { ADDGUEST } from '../../Graphql/user.graphql'
 import { Grid } from '@mui/material'
+import { ModalSuccessGuest } from '../../Component/Modal/UseModal'
+import Loading from '../../Component/Loading'
 
 
 const Home= () => {
-
+  const [open, setOpen] = useState(false)
+  
   const { handleSubmit, watch, control, formState, setValue, reset } = useForm<TForm>({
     mode: "all",
     reValidateMode: "onChange",
@@ -38,12 +41,19 @@ const Home= () => {
           data: values
         }
       });
+      setOpen(true)
     } catch (error) { }
   }
+
+  const Close = () => {
+    setOpen(false)
+  }
+
 
   return (
     <Wrapper>
        <Grid style={{ minHeight: '100vh', width: "100%", display: 'flex', flexDirection: "column", backgroundColor: "#d8cfcf" }}>
+       <ModalSuccessGuest open={open} onClose={Close} />
       <Header />
       <form onSubmit={handleSubmit(onSubmit)}>
       <FieldWrapper>
@@ -81,11 +91,12 @@ const Home= () => {
           
         </InputWrapper> 
         <ButtonWrapper>
-            <Buttons variant="contained" label='Submit' color='inherit' disabled={!isValid} type='submit'/>
+            <Buttons variant="contained" label='Submit' color='inherit' disabled={!isValid || loading} type='submit'/>
           </ButtonWrapper>
         </FieldWrapper>
         </form>
         </Grid>
+        {loading ? <Loading /> : null }
     </Wrapper>
   )
 }
@@ -106,6 +117,10 @@ const validationSchema =
     address: "",
     description: "",
   };
+
+const LoadingWrapper = styled.div`
+  
+`
 
 
 const Wrapper = styled.div`

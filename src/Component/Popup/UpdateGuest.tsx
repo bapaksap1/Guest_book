@@ -14,6 +14,8 @@ import { ADDGUEST, GUESTS, PORTAL_INIT_GUEST_UPDATE, UPDATEGUEST } from '../../G
 import { useMutation, useQuery } from '@apollo/client';
 import { Dialog } from '@mui/material';
 import data from '../Table/data';
+import { ModalSuccessUpdate } from '../Modal/UseModal';
+import Loading from '../Loading';
 
 
 type TModal = {
@@ -32,11 +34,13 @@ const style = {
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
+  borderRadius: "15px",
   p: 4,
 };
 
 const PopupUpdateGuest: React.FC<TModal> = (props) => {
   type TResGuest = {guest: TGuest}
+  const [modal, setModal] = React.useState(false)
 
   const { data: dataInit, refetch, loading: loadInit } = useQuery<TResGuest>(PORTAL_INIT_GUEST_UPDATE, {
     variables: { guestId: props.data?.id! },
@@ -61,6 +65,10 @@ const PopupUpdateGuest: React.FC<TModal> = (props) => {
     description: dataInit?.guest?.description,
   }), [dataInit]);
 
+  const Close = () => {
+    setModal(false)
+
+  }
 
 
 
@@ -72,6 +80,7 @@ const PopupUpdateGuest: React.FC<TModal> = (props) => {
         aria-describedby="modal-modal-description"
       >
         <div>
+        <ModalSuccessUpdate open={modal} onClose={Close} />
         <Typography id="modal-modal-title" variant="h6" component="h2">
             Update Tamu
           </Typography>
@@ -172,7 +181,7 @@ const FormData: React.FC<TFormdata> = ({ open, onClickClose, defaultValues, data
            />
         </InputWrapper> 
         <ButtonWrapper>
-            <Buttons label='Tambah' type='submit' disabled={!isValid}/>
+            <Buttons label='Updat' type='submit' disabled={!isValid || loading}/>
             <Buttons label='Batal' onClick={onClickClose}/>
           </ButtonWrapper>
         </Box>

@@ -1,11 +1,12 @@
 import { Backdrop, Button, Fade, Modal } from '@mui/material';
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import styled from 'styled-components';
 
 import { useMutation } from '@apollo/client';
 import { TMutationDeleteGuest } from '../../Types/guest';
 import { DELETEGUEST } from '../../Graphql/user.graphql';
 import Buttons from '../Button';
+import { ModalSuccessDelete } from '../Modal/UseModal';
 
 
 type TPopupDeleteGuest = {
@@ -16,6 +17,7 @@ type TPopupDeleteGuest = {
 }
 
 const PopupDeleteGuest: FC<TPopupDeleteGuest> = ({ open, onClickClose, data, refetch }) => {
+  const [modal, setModal] = useState(false)
 
   const [deleteGuest, { data: datares, error, loading}] = useMutation<TMutationDeleteGuest>(DELETEGUEST, {
     errorPolicy: "all",
@@ -41,12 +43,18 @@ const PopupDeleteGuest: FC<TPopupDeleteGuest> = ({ open, onClickClose, data, ref
     } catch (error) { }
   }
 
+  const Close = () => {
+    setModal(false)
+    onClickClose()
+  }
+
   return (
     <StyledModal
       open={open}
     >
       <Fade in={open} unmountOnExit>
         <ContentWrapper>
+        <ModalSuccessDelete open={modal} onClose={Close} />
           <div className="head"><p>Delete Confirmation</p><Button color="error" onClick={onClickClose}><CloseIcon /></Button></div>
           <div className="content">
             <div><p>ID</p><p>{data?.id || "-"}</p></div>

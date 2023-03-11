@@ -104,6 +104,7 @@ export default function TableComponent() {
     setPage(newPage);
   };
 
+
   const { data, error, loading, refetch } = useQuery<TResGuest>(GUESTS)
 
   const onClickDelete = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, dataProps: { id: string; name: string; }) => {
@@ -117,6 +118,8 @@ export default function TableComponent() {
     setUpdateData(data)
     setPopupUpdate(true)
   }
+
+ 
 
   const rows: any = data?.guests?.map((val, idx) =>  {
 
@@ -190,6 +193,9 @@ console.log(ro);
 //       doc.save('table.pdf')
 //    }
 
+  if(loading) return <LoadingWrapper>  <CircularProgress /> </LoadingWrapper>
+
+
 
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
@@ -247,7 +253,15 @@ console.log(ro);
       
     </Paper>
   );
+  
 }
+
+const LoadingWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  z-index: 100;
+  `
 
 const Action = styled.div`
   display: flex;

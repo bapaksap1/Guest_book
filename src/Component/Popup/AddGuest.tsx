@@ -12,6 +12,7 @@ import { Controller, useForm } from 'react-hook-form'
 import { TForm, TMutationAddGuest } from '../../Types/guest';
 import { ADDGUEST } from '../../Graphql/user.graphql';
 import { useMutation } from '@apollo/client';
+import { ModalSuccessAdmin } from '../Modal/UseModal';
 
 
 type TModal = {
@@ -28,12 +29,13 @@ const style = {
   width: 400,
   bgcolor: 'background.paper',
   border: '2px solid #000',
+  borderRadius: "15px",
   boxShadow: 24,
   p: 4,
 };
 
 const AddGuestModal: React.FC<TModal> = ({open, onClickClose}) => {
-
+  const[modal, setModal] = React.useState(false)
 
   React.useEffect(() => {
     if (open) {
@@ -64,7 +66,13 @@ const AddGuestModal: React.FC<TModal> = ({open, onClickClose}) => {
           data: values
         }
       });
+      setModal(true)
     } catch (error) { }
+  }
+
+  const Close = () => {
+    setModal(false)
+    onClickClose()
   }
 
 
@@ -78,6 +86,7 @@ const AddGuestModal: React.FC<TModal> = ({open, onClickClose}) => {
       >
       <form onSubmit={handleSubmit(onSubmit)}>
         <Box sx={style}>
+        <ModalSuccessAdmin open={modal} onClose={Close} />
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Tambah Tamu
           </Typography>
@@ -112,7 +121,7 @@ const AddGuestModal: React.FC<TModal> = ({open, onClickClose}) => {
            />
         </InputWrapper> 
         <ButtonWrapper>
-            <Buttons label='Tambah' type='submit' disabled={!isValid}/>
+            <Buttons label='Tambah' type='submit' disabled={!isValid || loading} />
             <Buttons label='Batal' onClick={onClickClose}/>
           </ButtonWrapper>
         </Box>
