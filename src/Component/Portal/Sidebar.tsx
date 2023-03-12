@@ -18,10 +18,12 @@ import styled from "styled-components"
 import logo from '../../Lambang_Polda_DIY.png' 
 import Dashboard from '../../Portal/Dashboard';
 import Users from '../../Portal/Users';
+import { useNavigate } from 'react-router-dom';
 
 const drawerWidth = 240;
 
 const PortalComponent = () => {
+  const navigate = useNavigate()
   const [menu, setMenu] = useState("Dashboard")
   const [selectedIndex, setSelectedIndnex] = useState(0)
 
@@ -29,6 +31,12 @@ const PortalComponent = () => {
     setMenu(text)
     setSelectedIndnex(index)
   }
+
+  const Logout = () => {
+    sessionStorage.removeItem("token")
+    navigate("/portal/login")
+  }
+
   return (
     <Box sx={{ display: 'flex' }}>
       <Drawer
@@ -60,7 +68,7 @@ const PortalComponent = () => {
           <Divider />
           <List>
               <ListItem key={'Logout'} disablePadding>
-                <ListItemButton>
+                <ListItemButton onClick={Logout}>
                   <ListItemIcon>
                      <LogoutIcon /> 
                   </ListItemIcon>

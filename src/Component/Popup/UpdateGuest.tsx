@@ -107,7 +107,7 @@ type TFormdata = {
 }
 
 const FormData: React.FC<TFormdata> = ({ open, onClickClose, defaultValues, data }) => {
-
+  const[modal, setModal] = React.useState(false)
   React.useEffect(() => {
     if (open) {
       reset()
@@ -141,12 +141,21 @@ const FormData: React.FC<TFormdata> = ({ open, onClickClose, defaultValues, data
         variables: {
           data: { ...values, guestId: data.id }
         }
+      
       });
+      setModal(true)
     } catch (error) { }
   }
+
+  const Close = () => {
+    setModal(false)
+    onClickClose()
+  }
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
         <Box sx={style}>
+        <ModalSuccessUpdate open={modal} onClose={Close} />
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Tambah Tamu
           </Typography>
@@ -181,7 +190,7 @@ const FormData: React.FC<TFormdata> = ({ open, onClickClose, defaultValues, data
            />
         </InputWrapper> 
         <ButtonWrapper>
-            <Buttons label='Updat' type='submit' disabled={!isValid || loading}/>
+            <Buttons label='Update' type='submit' disabled={!isValid || loading}/>
             <Buttons label='Batal' onClick={onClickClose}/>
           </ButtonWrapper>
         </Box>

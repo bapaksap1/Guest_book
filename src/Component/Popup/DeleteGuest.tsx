@@ -40,6 +40,7 @@ const PopupDeleteGuest: FC<TPopupDeleteGuest> = ({ open, onClickClose, data, ref
           guestId: data?.id
         }
       });
+      setModal(true)
     } catch (error) { }
   }
 
@@ -58,7 +59,7 @@ const PopupDeleteGuest: FC<TPopupDeleteGuest> = ({ open, onClickClose, data, ref
           <div className="head"><p>Delete Confirmation</p><Button color="error" onClick={onClickClose}><CloseIcon /></Button></div>
           <div className="content">
             <div><p>ID</p><p>{data?.id || "-"}</p></div>
-            <div><p>Title</p><p>{data?.name || "-"}</p></div>
+            <div><p>Nama</p><p>{data?.name || "-"}</p></div>
           </div>
           <div className="footer">
             <Buttons label="Delete" className="delete" variant="contained" onClick={onClickDelete}  disabled={loading} />

@@ -66,16 +66,16 @@ const Login = () => {
     if (data?.token) {
       sessionStorage.setItem("token", data?.token)
       enqueueSnackbar(data?.login.message, { variant: "success", anchorOrigin: { vertical: "bottom", horizontal: "left" }, autoHideDuration: 3000 })
-      // navigate('portal')
+      navigate('/portal')
+    } 
+    else if (error){
+   
+        enqueueSnackbar( "Something went wrong", { variant: "error", anchorOrigin: { vertical: "bottom", horizontal: "left" }, autoHideDuration: 5000 })
+      
     }
   }, [data])
 
-  React.useEffect(() => {
-    if (error)
-      console.log(error?.message);
-      enqueueSnackbar('That was easy!')
-      enqueueSnackbar(error?.message || "Something went wrong", { variant: "error", anchorOrigin: { vertical: "bottom", horizontal: "left" }, autoHideDuration: 5000 })
-  }, [error])
+ 
 
 
   const onSubmit = async (values: TFormLogin) => {
@@ -86,10 +86,9 @@ const Login = () => {
           password: encryptRSA(values.password)
         }
       });
-      console.log("tombol");
-
+    
     } catch (error) {
-
+      
     }
   }
 
@@ -117,7 +116,7 @@ const Login = () => {
               />
             </InputWrapper>
             <ButtonWrapper>
-              <Buttons variant="contained" label='Login' color='inherit' disabled={!isValid} type='submit' />
+              <Buttons variant="contained" label='Login' color='inherit' disabled={!isValid || loading} type='submit' />
             </ButtonWrapper>
           </FieldWrapper>
         </form>

@@ -42,6 +42,7 @@ const Home= () => {
         }
       });
       setOpen(true)
+      reset()
     } catch (error) { }
   }
 
