@@ -14,9 +14,15 @@ import { useMutation } from '@apollo/client'
 import { Grid } from '@mui/material'
 import { LOGIN } from '../../Graphql/auth.graphql'
 import ModalComponent from '../../Component/Modal'
-// import crypto from 'crypto'
+import crypto from 'crypto'
+import { useSnackbar } from 'notistack'
+import { useNavigate } from 'react-router-dom'
+
+
 
 const Login = () => {
+  const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar();
   type TLoginMutaion = {
     token: string;
     login: {
@@ -26,20 +32,22 @@ const Login = () => {
   }
   const PUBLIC_KEY = process.env.REACT_APP_PUBLIC_KEY as string
 
-  // const encryptRSA = (text: string) => {
-  //   const encrypted = crypto.publicEncrypt(
-  //     {
-  //       key: PUBLIC_KEY,
-  //       padding: crypto.constants.RSA_PKCS1_OAEP_PADDING,
-  //     },
-  //     Buffer.from(text, "utf8")
-  //   );
-  //   return encrypted.toString("base64");
-  // }
+  const encryptRSA = (text: string) => {
+    const encrypted = crypto.publicEncrypt(
+      {
+        key: PUBLIC_KEY,
+        padding: crypto.constants.RSA_PKCS1_OAEP_PADDING,
+      },
+      Buffer.from(text, "utf8")
+    );
+    return encrypted.toString("base64");
+  }
 
   useEffect(() => {
     sessionStorage.removeItem("token")
   }, [])
+
+ 
 
   const { handleSubmit, watch, control, formState, setValue, reset } = useForm<TFormLogin>({
     mode: "all",
@@ -54,13 +62,28 @@ const Login = () => {
     fetchPolicy: 'network-only'
   })
 
+  React.useEffect(() => {
+    if (data?.token) {
+      sessionStorage.setItem("token", data?.token)
+      enqueueSnackbar(data?.login.message, { variant: "success", anchorOrigin: { vertical: "bottom", horizontal: "left" }, autoHideDuration: 3000 })
+      // navigate('portal')
+    }
+  }, [data])
+
+  React.useEffect(() => {
+    if (error)
+      console.log(error?.message);
+      enqueueSnackbar('That was easy!')
+      enqueueSnackbar(error?.message || "Something went wrong", { variant: "error", anchorOrigin: { vertical: "bottom", horizontal: "left" }, autoHideDuration: 5000 })
+  }, [error])
+
 
   const onSubmit = async (values: TFormLogin) => {
     try {
       await login({
         variables: {
           username: values.username,
-          password: (values.password)
+          password: encryptRSA(values.password)
         }
       });
       console.log("tombol");
