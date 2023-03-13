@@ -127,10 +127,6 @@ const LoadingWrapper = styled.div`
 const Wrapper = styled.div`
   width: 100%;
   min-height: 100vh;
-  
-  box-sizing: border-box;
- 
-
 `
 
 const Animation = keyframes`
