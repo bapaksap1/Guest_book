@@ -145,8 +145,8 @@ const FieldWrapper = styled.div`
   padding-bottom: 60px;
   background-color: white; 
   border-radius: 15px;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 15px;
+  padding-right: 15px;
   border: 1px solid black;
   box-shadow: 4px 4px 4px 4px grey;
   max-height: 100vh;
