@@ -53,7 +53,7 @@ const Home= () => {
 
   return (
     <Wrapper>
-       <Grid style={{ minHeight: '100vh', width: "100%", paddingBottom: "60px", display: 'flex', flexDirection: "column", backgroundColor: "#d8cfcf" }}>
+       <Grid style={{ minHeight: '100vh', width: "100%", display: 'flex', flexDirection: "column", backgroundColor: "#d8cfcf" }}>
        <ModalSuccessGuest open={open} onClose={Close} />
       <Header />
       <form onSubmit={handleSubmit(onSubmit)}>
