@@ -143,7 +143,8 @@ const FieldWrapper = styled.div`
   border-radius: 15px;
   border: 1px solid black;
   box-shadow: 4px 4px 4px 4px grey;
-  max-height: 100vh;
+  
+  margin-bottom: 100px;
   /* animation-name: ${Animation};
   animation: 5s infinite; */
 
