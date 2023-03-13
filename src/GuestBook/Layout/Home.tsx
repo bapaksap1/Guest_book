@@ -150,7 +150,7 @@ const FieldWrapper = styled.div`
   max-height: 100vh;
   /* animation-name: ${Animation};
   animation: 5s infinite; */
-  box-sizing: border-box;
+
 `
 
 const Title = styled.p`
