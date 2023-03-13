@@ -53,7 +53,7 @@ const Home= () => {
 
   return (
     <Wrapper>
-       <Grid style={{ minHeight: '100vh', width: "100%", display: 'flex', flexDirection: "column", backgroundColor: "#d8cfcf" }}>
+       <Grid style={{ minHeight: '100vh', width: "100%", paddingBottom: "60px", display: 'flex', flexDirection: "column", backgroundColor: "#d8cfcf" }}>
        <ModalSuccessGuest open={open} onClose={Close} />
       <Header />
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -145,6 +145,8 @@ const FieldWrapper = styled.div`
   padding-bottom: 60px;
   background-color: white; 
   border-radius: 15px;
+  padding-left: 20px;
+  padding-right: 20px;
   border: 1px solid black;
   box-shadow: 4px 4px 4px 4px grey;
   max-height: 100vh;
