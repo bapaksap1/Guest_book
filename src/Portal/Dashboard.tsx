@@ -80,5 +80,5 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-
+  gap: 15px;
 `
