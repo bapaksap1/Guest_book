@@ -4,35 +4,13 @@ import styled from 'styled-components'
 const TemplatePDF = () => {
   return (
     <html>
-      <header>ini header gan</header>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p><p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
+      <table>
+        <tr>
+          <td>
+            nama: Nopal
+          </td>
+        </tr>
+      </table>
 
     </html>
   )

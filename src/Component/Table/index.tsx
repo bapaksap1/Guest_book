@@ -178,21 +178,6 @@ export default function TableComponent() {
   };
 
  
-
-  
-
-console.log(ro);
-
-
-// autoTable(doc, {
-//   head: [col],
-//   body: [ro]
-// })
-
-//    const createPDF = () => {
-//       doc.save('table.pdf')
-//    }
-
   if(loading) return <LoadingWrapper>  <CircularProgress /> </LoadingWrapper>
 
 
