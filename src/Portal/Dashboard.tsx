@@ -38,7 +38,7 @@ const Dashboard = () => {
   const document = new jsPDF()
 
   autoTable(document, {
-    theme: "plain",
+    theme: 'grid',
     head: [['No', 'Nama', "Alamat", 'Nomor Telephone', 'Keperluan', 'Tanggal Kunjungan']],
     body: dataTamu?.guests?.map((val, idx) => {
       return [ String(idx + 1),
@@ -48,7 +48,17 @@ const Dashboard = () => {
         val?.description,
         moment(val?.createdAt).locale("id").format("DD/MM/YYYY HH:mm:ss")]
     }),
-  })
+    margin: { horizontal: 7 },
+    styles: { overflow: "linebreak" },
+    bodyStyles: { valign: "top" },
+    startY: 25,
+    didDrawPage: function (data) {
+      // Header
+      document.setFontSize(20);
+      document.setTextColor(40);
+      document.text("Daftar Kunjugan", data.settings.margin.left, 22);
+  }})
+
   const Save = () => {
     document.save('table.pdf')
   }

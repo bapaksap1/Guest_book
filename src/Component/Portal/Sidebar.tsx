@@ -48,7 +48,7 @@ const PortalComponent = () => {
         }}
       >
         <Logo src={logo} alt="logo" />
-        <P> Kepolisian Daerah<br/>Daerah Istimewa Yogyakarta</P>
+        <P> Kepolisian Sektor<br/>Gondomanan</P>
         <Divider />
         <Box sx={{ overflow: 'auto' }}>
           <List>

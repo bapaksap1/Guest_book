@@ -10,11 +10,10 @@ import TableRow from '@mui/material/TableRow';
 import  Button  from "@mui/material/Button"
 
 import jsPDF from 'jspdf'
-import autoTable from 'jspdf-autotable'
 
 import moment from 'moment';
 import styled from 'styled-components';
-import { useMutation, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { TGuest } from '../../Types/guest';
 import { GUESTS } from '../../Graphql/user.graphql';
 import { useState } from 'react';

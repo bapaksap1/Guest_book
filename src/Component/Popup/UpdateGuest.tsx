@@ -9,13 +9,10 @@ import styled from 'styled-components';
 import Buttons from '../Button';
 import * as yup from "yup"
 import { Controller, useForm } from 'react-hook-form'
-import { TForm, TGuest, TMutationAddGuest, TMutationUpdateGuest } from '../../Types/guest';
-import { ADDGUEST, GUESTS, PORTAL_INIT_GUEST_UPDATE, UPDATEGUEST } from '../../Graphql/user.graphql';
+import { TForm, TGuest, TMutationUpdateGuest } from '../../Types/guest';
+import { PORTAL_INIT_GUEST_UPDATE, UPDATEGUEST } from '../../Graphql/user.graphql';
 import { useMutation, useQuery } from '@apollo/client';
-import { Dialog } from '@mui/material';
-import data from '../Table/data';
 import { ModalSuccessUpdate } from '../Modal/UseModal';
-import Loading from '../Loading';
 
 
 type TModal = {
