@@ -48,7 +48,7 @@ const PortalComponent = () => {
         }}
       >
         <Logo src={logo} alt="logo" />
-        <P> Kepolisian Sektor<br/>Gondomanan</P>
+        <P> Kepolisian Sektor<br/>Gondokusuman</P>
         <Divider />
         <Box sx={{ overflow: 'auto' }}>
           <List>

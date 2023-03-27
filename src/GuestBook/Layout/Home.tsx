@@ -58,7 +58,7 @@ const Home= () => {
       <Header />
       <form onSubmit={handleSubmit(onSubmit)}>
       <FieldWrapper>
-        <Title>Selamat Datang <br/> di Polsek Gondomanan</Title>
+        <Title>Selamat Datang <br/> di Polsek Gondokusuman</Title>
         <SubTitle>Silahkan Isi Buku Tamu Terlebih Dahulu</SubTitle>
         <InputWrapper>
         <Controller

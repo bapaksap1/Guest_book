@@ -4,7 +4,7 @@ import styled from 'styled-components'
 const Footer = () => {
   return (
     <Wrapper>
-      <Label>@Copyright 2023 Polsek Gondomanan</Label>
+      <Label>@Copyright 2023 Polsek Gondokusuman</Label>
     </Wrapper>
   )
 }

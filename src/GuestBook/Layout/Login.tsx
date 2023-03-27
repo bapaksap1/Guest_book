@@ -73,6 +73,7 @@ const Login = () => {
         enqueueSnackbar( "Something went wrong", { variant: "error", anchorOrigin: { vertical: "bottom", horizontal: "left" }, autoHideDuration: 5000 })
       
     }
+   
   }, [data])
 
  
@@ -98,7 +99,7 @@ const Login = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <FieldWrapper>
             <Title>Login Admin</Title>
-            <SubTitle>Buku Tamu Polsek Gondomanan</SubTitle>
+            <SubTitle>Buku Tamu Polsek Gondokusuman</SubTitle>
             <InputWrapper>
               <Controller
                 name="username"
