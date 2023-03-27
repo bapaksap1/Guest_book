@@ -60,7 +60,7 @@ const Dashboard = () => {
   }})
 
   const Save = () => {
-    document.save('table.pdf')
+    document.save('Laporan Daftar Tamu.pdf')
   }
 
   
